@@ -1,0 +1,31 @@
+.playlist-wrapper {
+    display: flex;
+    gap: 1rem;
+    list-style-type: none;
+    overflow-x: auto;
+}
+
+.playlist-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.playlist-li {
+    background-color: aliceblue;
+    cursor: pointer;
+}
+
+.playlist-img {
+    min-height: 20rem;
+    height: 20rem;
+    width: 20rem;
+}
+
+.playlist-name {
+    color: black;
+}
+
+button {
+    border: 0;
+    font-size: 25px;
+    margin: 0 8px;
+}

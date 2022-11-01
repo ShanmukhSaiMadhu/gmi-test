@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
 import './App.css';
+import Player from './components/Player';
+import Playlist from './components/Playlist';
 
 function App() {
+  const [list, setList] = useState([])
+    const [data, setData] = useState(null)
+    const [url, setUrl] = useState("www.youtube.com/rrr")
+    const [loading, setLoading] = useState(true)
+  
+  useEffect(() => {
+    fetch(`https://dry-refuge-78670.herokuapp.com/api/v1/video`)
+    .then(res => res.json())
+    .then((actualData) => {
+        setData(actualData);
+    })
+    .catch((err) => {
+        setData(null);
+    })
+    .finally(() => {
+        setLoading(false);
+    });
+  }, []);
+    
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 style={{color: 'red'}}>Movie Player</h1>
+      {
+        loading ? <div>A moment please...</div>
+        :
+        <Playlist apiData={data} setUrl={setUrl} />
+      }
+      <Player url={url} />
     </div>
   );
 }
